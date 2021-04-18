@@ -6,10 +6,7 @@ public with sharing class AccountTriggerHandler {
 
         for (Account a : accounts) {
             a.ShippingState = a.BillingState;
-            lstAcc.add(a);
         }
-
-        insert lstAcc;
 
     }
 

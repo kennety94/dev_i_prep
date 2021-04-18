@@ -3,7 +3,6 @@ public class AccountTriggerTest {
     
     @isTest static void testInsert() {
         List<Account> lstAcc = new List<Account>();
-        Integer count = 0;
 
         for (Integer i = 0; i < 200; i++) {
             Account a = new Account();
@@ -15,15 +14,10 @@ public class AccountTriggerTest {
 
         insert lstAcc;
 
-        List<Account> checkList = [SELECT Id, ShippingState FROM Account WHERE ShippingState = 'CA'];
+        // List<Account> checkList = [SELECT Id, ShippingState FROM Account WHERE ShippingState = 'CA'];
+        List<Account> checkList = [SELECT Id, ShippingState FROM Account WHERE ShippingState = 'CA' AND ID in :lstAcc];
 
-        for (Account ac : checkList) {
-            if(ac.ShippingState == 'CA' && lstAcc.contains(ac.ID)) {
-                count++;
-            }
-        }
-
-        System.assertEquals(200, count);
+        System.assertEquals(200, checkList.size());
     }
     
 }
